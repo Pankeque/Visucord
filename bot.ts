@@ -537,7 +537,8 @@ async function checkMessageAchievements(guildId: string, discordId: string, mess
   }
 }
 
-// Verificar conquistas de vozasync function checkVoiceAchievements(guildId: string, discordId: string, voiceMinutes: number) {
+// Verificar conquistas de voz
+async function checkVoiceAchievements(guildId: string, discordId: string, voiceMinutes: number) {
   const achievementsToCheck = [
     { minutes: 1, badge: 'first_voice' },
     { minutes: 60, badge: '1_hour_voice' },
@@ -978,7 +979,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
     await interaction.reply({ embeds: [embed] });
   }
 
-  // Comando /voice-stats  if (interaction.commandName === 'voice-stats') {
+  // Comando /voice-stats
+  if (interaction.commandName === 'voice-stats') {
     if (!interaction.guildId) {
       await interaction.reply('This command can only be used in a server.');
       return;
