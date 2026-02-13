@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "name": "visucord-discord-bot",
+  "builds": [
+    {
+      "src": "api/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.ts"
+    }
+  ],
+  "env": {
+    "DISCORD_TOKEN": "@discord-token"
+  },
+  "functions": {
+    "api/index.ts": {
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/index.ts",
+      "schedule": "0 */5 * * * *"
+    }
+  ]
+}

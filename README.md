@@ -52,11 +52,67 @@ npm run build
 npm start
 ```
 
+## Deploy na Vercel
+
+### Pré-requisitos
+1. Conta na [Vercel](https://vercel.com)
+2. Repositório Git com o código do bot
+
+### Passos para Deploy
+
+1. **Conecte seu repositório na Vercel:**
+   - Acesse [vercel.com](https://vercel.com)
+   - Clique em "New Project"
+   - Importe seu repositório Git
+
+2. **Configure as variáveis de ambiente:**
+   - No dashboard do projeto, vá em "Settings" > "Environment Variables"
+   - Adicione `DISCORD_TOKEN` com o token do seu bot
+
+3. **Deploy automático:**
+   - A Vercel detectará automaticamente as configurações do `vercel.json`
+   - O deploy será feito automaticamente a cada push
+
+### Estrutura para Vercel
+
+```
+├── api/
+│   └── index.ts      # Serverless function para Vercel
+├── bot.ts            # Código principal do bot
+├── storage.ts        # Sistema de armazenamento
+├── vercel.json       # Configuração da Vercel
+├── package.json      # Dependências
+└── tsconfig.json     # Configuração TypeScript
+```
+
+### Health Check
+
+O endpoint principal (`/`) retorna informações sobre o status do bot:
+
+```json
+{
+  "status": "ok",
+  "bot": {
+    "started": true,
+    "ready": true,
+    "user": "BotName#1234",
+    "guilds": 5,
+    "uptime": 3600
+  },
+  "timestamp": "2024-01-01T00:00:00.000Z"
+}
+```
+
+### Cron Jobs
+
+O `vercel.json` inclui um cron job que executa a cada 5 minutos para manter o bot ativo.
+
 ## Tecnologias
 
 - Discord.js
 - TypeScript
 - tsx (para desenvolvimento)
+- Vercel (deploy serverless)
 
 ## Funcionalidades Principais
 
@@ -90,6 +146,7 @@ npm start
 - O bot usa armazenamento em memória, então dados são perdidos ao reiniciar
 - Para persistência, implemente um banco de dados (MySQL, PostgreSQL, MongoDB)
 - Certifique-se de habilitar intents priviligadas no Discord Developer Portal
+- Para deploy na Vercel, configure a variável de ambiente `DISCORD_TOKEN`
 
 ## Licença
 
